@@ -1,0 +1,14 @@
+{
+  "haxe.diagnosticsPathFilter": "${workspaceRoot}/source",
+  "search.exclude": {
+    "export/**/*.hx": true
+  },
+  "lime.defaultBuildConfiguration": "Debug",
+  "lime.defaultTarget": "HTML5",
+  "haxe.displayConfigurations": [
+    ["export/html5/haxe/debug.hxml"],
+    ["export/html5/haxe/release.hxml"],
+    ["export/flash/haxe/debug.hxml"],
+    ["export/flash/haxe/release.hxml"]
+  ]
+}
