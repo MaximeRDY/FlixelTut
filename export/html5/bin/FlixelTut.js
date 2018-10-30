@@ -807,9 +807,9 @@ ApplicationMain.create = function(config) {
 	ManifestResources.init(config);
 	var _this = app.meta;
 	if(__map_reserved["build"] != null) {
-		_this.setReserved("build","18");
+		_this.setReserved("build","1");
 	} else {
-		_this.h["build"] = "18";
+		_this.h["build"] = "1";
 	}
 	var _this1 = app.meta;
 	if(__map_reserved["company"] != null) {
@@ -4149,6 +4149,9 @@ DocumentClass.__super__ = Main;
 DocumentClass.prototype = $extend(Main.prototype,{
 	__class__: DocumentClass
 });
+var AssetPaths = function() { };
+$hxClasses["AssetPaths"] = AssetPaths;
+AssetPaths.__name__ = ["AssetPaths"];
 var EReg = function(r,opt) {
 	this.r = new RegExp(r,opt.split("u").join(""));
 };
@@ -4346,7 +4349,7 @@ ManifestResources.init = function(config) {
 	lime_utils_Assets.defaultRootPath = rootPath;
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
-	var data = "{\"name\":null,\"assets\":\"aoy4:pathy36:assets%2Fmusic%2Fmusic-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R7R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R8R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R9R6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR11y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R10R5y26:flixel%2Fsounds%2Fbeep.mp3R12aR14y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3y5:SOUNDR5R15R12aR14R15hgoR2i33629R3R16R5R13R12aR11R13hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R17R18y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3y5:IMAGER5R23R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R24R5R25R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	var data = "{\"name\":null,\"assets\":\"aoy4:pathy36:assets%2Fmusic%2Fmusic-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R7R6tgoR0y28:assets%2Fimages%2Fplayer.pngR2i1876R3y5:IMAGER5R8R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R10R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R11R6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR13y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R12R5y26:flixel%2Fsounds%2Fbeep.mp3R14aR16y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3y5:SOUNDR5R17R14aR16R17hgoR2i33629R3R18R5R15R14aR13R15hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R19R20y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R9R5R25R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R9R5R26R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	var manifest = lime_utils_AssetManifest.parse(data,rootPath);
 	var library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -7566,7 +7569,12 @@ var Player = function(X,Y) {
 	}
 	this.speed = 200;
 	flixel_FlxSprite.call(this,X,Y);
-	this.makeGraphic(16,16,-16776961);
+	this.loadGraphic("assets/images/player.png",true,16,16);
+	this._facingFlip.h[1] = { x : false, y : false};
+	this._facingFlip.h[16] = { x : true, y : false};
+	this.animation.add("lr",[3,4,3,5],6,false);
+	this.animation.add("u",[6,7,6,8],6,false);
+	this.animation.add("d",[0,1,0,2],6,false);
 	this.drag.set_x(this.drag.set_y(1600));
 };
 $hxClasses["Player"] = Player;
@@ -7604,6 +7612,7 @@ Player.prototype = $extend(flixel_FlxSprite.prototype,{
 				} else if(_right) {
 					mA += 45;
 				}
+				this.set_facing(256);
 			} else if(_down) {
 				mA = 90;
 				if(_left) {
@@ -7611,10 +7620,13 @@ Player.prototype = $extend(flixel_FlxSprite.prototype,{
 				} else if(_right) {
 					mA -= 45;
 				}
+				this.set_facing(4096);
 			} else if(_left) {
 				mA = 180;
+				this.set_facing(1);
 			} else if(_right) {
 				mA = 0;
+				this.set_facing(16);
 			}
 			this.velocity.set(this.speed,0);
 			var tmp = this.velocity;
@@ -7623,6 +7635,20 @@ Player.prototype = $extend(flixel_FlxSprite.prototype,{
 			var point1 = point;
 			point1._weak = true;
 			tmp.rotate(point1,mA);
+			if((this.velocity.x != 0 || this.velocity.y != 0) && this.touching == 0) {
+				var _g = this.facing;
+				switch(_g) {
+				case 1:case 16:
+					this.animation.play("lr");
+					break;
+				case 256:
+					this.animation.play("u");
+					break;
+				case 4096:
+					this.animation.play("d");
+					break;
+				}
+			}
 		}
 	}
 	,__class__: Player
@@ -64504,7 +64530,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 188150;
+	this.version = 209801;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = ["lime","utils","AssetCache"];
@@ -107560,6 +107586,11 @@ openfl_display_DisplayObject.__tempStack = new lime_utils_ObjectPool(function() 
 },function(stack) {
 	stack.set_length(0);
 });
+AssetPaths.music_goes_here__txt = "assets/music/music-goes-here.txt";
+AssetPaths.images_go_here__txt = "assets/images/images-go-here.txt";
+AssetPaths.player__png = "assets/images/player.png";
+AssetPaths.sounds_go_here__txt = "assets/sounds/sounds-go-here.txt";
+AssetPaths.data_goes_here__txt = "assets/data/data-goes-here.txt";
 openfl_text_Font.__fontByName = new haxe_ds_StringMap();
 openfl_text_Font.__registeredFonts = [];
 flixel_math_FlxRect._pool = new flixel_util_FlxPool_$flixel_$math_$FlxRect(flixel_math_FlxRect);
