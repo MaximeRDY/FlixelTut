@@ -65,7 +65,7 @@ import sys.FileSystem;
 		
 		#else
 		
-		data = '{"name":null,"assets":"aoy4:pathy36:assets%2Fmusic%2Fmusic-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R7R6tgoR0y28:assets%2Fimages%2Fplayer.pngR2i1876R3y5:IMAGER5R8R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R10R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R11R6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR13y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R12R5y26:flixel%2Fsounds%2Fbeep.mp3R14aR16y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3y5:SOUNDR5R17R14aR16R17hgoR2i33629R3R18R5R15R14aR13R15hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R19R20y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R9R5R25R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R9R5R26R6tgh","rootPath":null,"version":2,"libraryArgs":[],"libraryType":null}';
+		data = '{"name":null,"assets":"aoy4:pathy36:assets%2Fmusic%2Fmusic-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R7R6tgoR0y28:assets%2Fimages%2Fplayer.pngR2i1876R3y5:IMAGER5R8R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R10R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R11R6tgoR0y23:assets%2Fdata%2Fmap.tmxR2i2948R3R4R5R12R6tgoR0y25:assets%2Fdata%2Ftiles.pngR2i1056R3R9R5R13R6tgoR0y25:assets%2Fdata%2Ftiles.tsxR2i217R3R4R5R14R6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR16y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R15R5y26:flixel%2Fsounds%2Fbeep.mp3R17aR19y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3y5:SOUNDR5R20R17aR19R20hgoR2i33629R3R21R5R18R17aR16R18hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R22R23y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R9R5R28R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R9R5R29R6tgh","rootPath":null,"version":2,"libraryArgs":[],"libraryType":null}';
 		manifest = AssetManifest.parse (data, rootPath);
 		library = AssetLibrary.fromManifest (manifest);
 		Assets.registerLibrary ("default", library);
@@ -98,6 +98,9 @@ null
 @:keep @:bind #if display private #end class __ASSET__assets_images_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_data_goes_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_map_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_tiles_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_data_tiles_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_mp3 extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_mp3 extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
@@ -116,6 +119,9 @@ null
 @:keep @:image("assets/images/player.png") #if display private #end class __ASSET__assets_images_player_png extends lime.graphics.Image {}
 @:keep @:file("assets/sounds/sounds-go-here.txt") #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends haxe.io.Bytes {}
 @:keep @:file("assets/data/data-goes-here.txt") #if display private #end class __ASSET__assets_data_data_goes_here_txt extends haxe.io.Bytes {}
+@:keep @:file("assets/data/map.tmx") #if display private #end class __ASSET__assets_data_map_tmx extends haxe.io.Bytes {}
+@:keep @:image("assets/data/tiles.png") #if display private #end class __ASSET__assets_data_tiles_png extends lime.graphics.Image {}
+@:keep @:file("assets/data/tiles.tsx") #if display private #end class __ASSET__assets_data_tiles_tsx extends haxe.io.Bytes {}
 @:keep @:file("/usr/local/lib/haxe/lib/flixel/4,5,1/assets/sounds/flixel.mp3") #if display private #end class __ASSET__flixel_sounds_flixel_mp3 extends haxe.io.Bytes {}
 @:keep @:file("/usr/local/lib/haxe/lib/flixel/4,5,1/assets/sounds/beep.mp3") #if display private #end class __ASSET__flixel_sounds_beep_mp3 extends haxe.io.Bytes {}
 @:keep @:file("/usr/local/lib/haxe/lib/flixel/4,5,1/assets/sounds/beep.ogg") #if display private #end class __ASSET__flixel_sounds_beep_ogg extends haxe.io.Bytes {}

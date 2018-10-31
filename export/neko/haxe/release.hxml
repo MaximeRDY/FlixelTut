@@ -10,6 +10,8 @@
 --macro keep('IntIterator')
 -cp /usr/local/lib/haxe/lib/hscript/2,3,0
 -D hscript=2.3.0
+-cp /usr/local/lib/haxe/lib/flixel-addons/2,7,0
+-D flixel-addons=2.7.0
 -cp source
 -D lime-openal
 -D native
@@ -19,10 +21,9 @@
 -D lime-harfbuzz
 -D tools=7.1.1
 -D lime-cairo
--D FLX_NO_DEBUG
+-D NAPE_NO_INLINE
 -D lime-opengl
 -D no-compilation
--D NAPE_RELEASE_BUILD
 -D FLX_NO_TOUCH
 -D lime-native
 -D lime-vorbis

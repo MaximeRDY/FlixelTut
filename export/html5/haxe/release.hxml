@@ -10,6 +10,8 @@
 --macro keep('IntIterator')
 -cp /usr/local/lib/haxe/lib/hscript/2,3,0
 -D hscript=2.3.0
+-cp /usr/local/lib/haxe/lib/flixel-addons/2,7,0
+-D flixel-addons=2.7.0
 -cp source
 -D MAC_USE_CURRENT_SDK=1
 -D tools=7.1.1
