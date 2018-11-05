@@ -1,5 +1,6 @@
 package;
 
+import flixel.system.debug.log.LogStyle;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxG;
 import flixel.addons.editors.tiled.TiledObjectLayer;
@@ -14,6 +15,7 @@ class PlayState extends FlxState {
 	var _map:TiledMap;
 	var _mWalls:FlxTilemap;
 	var _grpCoins:FlxTypedGroup<Coin>;
+	var _grpEnemies:FlxTypedGroup<Enemy>;
 
 	override public function create():Void {
 		_map = new TiledMap(AssetPaths.map__tmx);
@@ -28,6 +30,9 @@ class PlayState extends FlxState {
 
 		_grpCoins = new FlxTypedGroup<Coin>();
 		add(_grpCoins);
+
+		_grpEnemies = new FlxTypedGroup<Enemy>();
+		add(_grpEnemies);
 
 		_player = new Player(20, 20);
 		var tmpMap:TiledObjectLayer = cast _map.getLayer("entities");
@@ -45,6 +50,8 @@ class PlayState extends FlxState {
 	override public function update(elapsed:Float):Void {
 		FlxG.collide(_player, _mWalls);
 		FlxG.overlap(_player, _grpCoins, playerTouchCoin);
+		FlxG.collide(_grpEnemies, _mWalls);
+		_grpEnemies.forEachAlive(checkEnemyVision);
 		super.update(elapsed);
 	}
 
@@ -56,7 +63,26 @@ class PlayState extends FlxState {
 			_player.y = y;
 		} else if (entityName == "coin") {
 			_grpCoins.add(new Coin(x + 4, y + 4));
+		} else if (entityName == "enemy") {
+			_grpEnemies.add(new Enemy(x + 4, y, Std.parseInt(getProperty(entityData, "etype"))));
 		}
+	}
+
+	function getProperty(xml:Xml, propertyName:String):String {
+		for (property in xml.elementsNamed("properties").next().elementsNamed('property')) {
+			if (property.get('name') == 'etype') {
+				return property.get('value');
+			}
+		}
+		return "null";
+	}
+
+	function checkEnemyVision(e:Enemy):Void {
+		if (_mWalls.ray(e.getMidpoint(), _player.getMidpoint())) {
+			e.seesPlayer = true;
+			e.playerPos.copyFrom(_player.getMidpoint());
+		} else
+			e.seesPlayer = false;
 	}
 
 	function playerTouchCoin(player:Player, coin:Coin):Void {

@@ -807,9 +807,9 @@ ApplicationMain.create = function(config) {
 	ManifestResources.init(config);
 	var _this = app.meta;
 	if(__map_reserved["build"] != null) {
-		_this.setReserved("build","3");
+		_this.setReserved("build","4");
 	} else {
-		_this.h["build"] = "3";
+		_this.h["build"] = "4";
 	}
 	var _this1 = app.meta;
 	if(__map_reserved["company"] != null) {
@@ -6482,6 +6482,124 @@ EReg.prototype = {
 	}
 	,__class__: EReg
 };
+var Enemy = function(X,Y,EType) {
+	if(Y == null) {
+		Y = 0;
+	}
+	if(X == null) {
+		X = 0;
+	}
+	this.seesPlayer = false;
+	this.speed = 140;
+	flixel_FlxSprite.call(this,X,Y);
+	var log = new flixel_system_debug_log_LogStyle("[Enemy Etype]","00FF40");
+	flixel_FlxG.log.advanced("" + this.etype + "",log);
+	this.etype = EType;
+	this.loadGraphic("assets/images/enemy-" + this.etype + ".png",true,16,16);
+	this._facingFlip.h[1] = { x : false, y : false};
+	this._facingFlip.h[16] = { x : true, y : false};
+	this.animation.add("d",[0,1,0,2],6,false);
+	this.animation.add("lr",[3,4,3,5],6,false);
+	this.animation.add("u",[6,7,6,8],6,false);
+	this.drag.set_x(this.drag.set_y(10));
+	this.set_width(8);
+	this.set_height(14);
+	this.offset.set_x(4);
+	this.offset.set_y(2);
+	this._brain = new FSM($bind(this,this.idle));
+	this._idleTmr = 0;
+	var point = flixel_math_FlxPoint._pool.get().set(0,0);
+	point._inPool = false;
+	this.playerPos = point;
+};
+$hxClasses["Enemy"] = Enemy;
+Enemy.__name__ = ["Enemy"];
+Enemy.__super__ = flixel_FlxSprite;
+Enemy.prototype = $extend(flixel_FlxSprite.prototype,{
+	speed: null
+	,etype: null
+	,_brain: null
+	,_idleTmr: null
+	,_moveDir: null
+	,seesPlayer: null
+	,playerPos: null
+	,draw: function() {
+		if((this.velocity.x != 0 || this.velocity.y != 0) && this.touching == 0) {
+			if(Math.abs(this.velocity.x) > Math.abs(this.velocity.y)) {
+				if(this.velocity.x < 0) {
+					this.set_facing(1);
+				} else {
+					this.set_facing(16);
+				}
+			} else if(this.velocity.y < 0) {
+				this.set_facing(256);
+			} else {
+				this.set_facing(4096);
+			}
+			var _g = this.facing;
+			switch(_g) {
+			case 1:case 16:
+				this.animation.play("lr");
+				break;
+			case 256:
+				this.animation.play("u");
+				break;
+			case 4096:
+				this.animation.play("d");
+				break;
+			}
+		}
+		flixel_FlxSprite.prototype.draw.call(this);
+	}
+	,idle: function() {
+		if(this.seesPlayer) {
+			this._brain.activeState = $bind(this,this.chase);
+		} else if(this._idleTmr <= 0) {
+			if(flixel_FlxG.random.float(0,100) < 1) {
+				this._moveDir = -1;
+				this.velocity.set_x(this.velocity.set_y(0));
+			} else {
+				this._moveDir = flixel_FlxG.random.int(0,8) * 45;
+				this.velocity.set(this.speed * 0.5,0);
+				var tmp = this.velocity;
+				var point = flixel_math_FlxPoint._pool.get().set(0,0);
+				point._inPool = false;
+				var point1 = point;
+				point1._weak = true;
+				tmp.rotate(point1,this._moveDir);
+			}
+			this._idleTmr = flixel_FlxG.random.int(1,4);
+		} else {
+			this._idleTmr -= flixel_FlxG.elapsed;
+		}
+	}
+	,chase: function() {
+		if(!this.seesPlayer) {
+			this._brain.activeState = $bind(this,this.idle);
+		} else {
+			flixel_math_FlxVelocity.moveTowardsPoint(this,this.playerPos,this.speed | 0);
+		}
+	}
+	,update: function(elapsed) {
+		this._brain.update();
+		flixel_FlxSprite.prototype.update.call(this,elapsed);
+	}
+	,__class__: Enemy
+});
+var FSM = function(InitState) {
+	this.activeState = InitState;
+};
+$hxClasses["FSM"] = FSM;
+FSM.__name__ = ["FSM"];
+FSM.prototype = {
+	activeState: null
+	,update: function() {
+		if(this.activeState != null) {
+			this.activeState();
+		}
+	}
+	,__class__: FSM
+};
 var HxOverrides = function() { };
 $hxClasses["HxOverrides"] = HxOverrides;
 HxOverrides.__name__ = ["HxOverrides"];
@@ -6589,7 +6707,7 @@ ManifestResources.init = function(config) {
 	lime_utils_Assets.defaultRootPath = rootPath;
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$nokiafc22_$ttf);
 	openfl_text_Font.registerFont(_$_$ASSET_$_$OPENFL_$_$flixel_$fonts_$monsterrat_$ttf);
-	var data = "{\"name\":null,\"assets\":\"aoy4:pathy36:assets%2Fmusic%2Fmusic-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y26:assets%2Fimages%2Fcoin.pngR2i984R3y5:IMAGER5R7R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R9R6tgoR0y28:assets%2Fimages%2Fplayer.pngR2i1876R3R8R5R10R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R11R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R12R6tgoR0y23:assets%2Fdata%2Fmap.tmxR2i3950R3R4R5R13R6tgoR0y25:assets%2Fdata%2Ftiles.pngR2i1056R3R8R5R14R6tgoR0y25:assets%2Fdata%2Ftiles.tsxR2i217R3R4R5R15R6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR17y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R16R5y26:flixel%2Fsounds%2Fbeep.mp3R18aR20y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3y5:SOUNDR5R21R18aR20R21hgoR2i33629R3R22R5R19R18aR17R19hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R23R24y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R8R5R29R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R8R5R30R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	var data = "{\"name\":null,\"assets\":\"aoy4:pathy36:assets%2Fmusic%2Fmusic-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y29:assets%2Fimages%2Fenemy-0.pngR2i2405R3y5:IMAGER5R7R6tgoR0y29:assets%2Fimages%2Fenemy-1.pngR2i2558R3R8R5R9R6tgoR0y26:assets%2Fimages%2Fcoin.pngR2i984R3R8R5R10R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R11R6tgoR0y28:assets%2Fimages%2Fplayer.pngR2i1876R3R8R5R12R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R13R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R14R6tgoR0y23:assets%2Fdata%2Fmap.tmxR2i4913R3R4R5R15R6tgoR0y25:assets%2Fdata%2Ftiles.pngR2i1056R3R8R5R16R6tgoR0y25:assets%2Fdata%2Ftiles.tsxR2i217R3R4R5R17R6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR19y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R18R5y26:flixel%2Fsounds%2Fbeep.mp3R20aR22y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3y5:SOUNDR5R23R20aR22R23hgoR2i33629R3R24R5R21R20aR19R21hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R25R26y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R8R5R31R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R8R5R32R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	var manifest = lime_utils_AssetManifest.parse(data,rootPath);
 	var library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -7581,6 +7699,7 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	,_map: null
 	,_mWalls: null
 	,_grpCoins: null
+	,_grpEnemies: null
 	,create: function() {
 		this._map = new flixel_addons_editors_tiled_TiledMap("assets/data/map.tmx");
 		this._mWalls = new flixel_tile_FlxTilemap();
@@ -7591,6 +7710,8 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 		this.add(this._mWalls);
 		this._grpCoins = new flixel_group_FlxTypedGroup();
 		this.add(this._grpCoins);
+		this._grpEnemies = new flixel_group_FlxTypedGroup();
+		this.add(this._grpEnemies);
 		this._player = new Player(20,20);
 		var tmpMap = this._map.getLayer("entities");
 		var _g = 0;
@@ -7607,6 +7728,8 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 	,update: function(elapsed) {
 		flixel_FlxG.overlap(this._player,this._mWalls,null,flixel_FlxObject.separate);
 		flixel_FlxG.overlap(this._player,this._grpCoins,$bind(this,this.playerTouchCoin));
+		flixel_FlxG.overlap(this._grpEnemies,this._mWalls,null,flixel_FlxObject.separate);
+		this._grpEnemies.forEachAlive($bind(this,this.checkEnemyVision));
 		flixel_FlxState.prototype.update.call(this,elapsed);
 	}
 	,placeEntities: function(entityName,entityData) {
@@ -7617,6 +7740,32 @@ PlayState.prototype = $extend(flixel_FlxState.prototype,{
 			this._player.set_y(y);
 		} else if(entityName == "coin") {
 			this._grpCoins.add(new Coin(x + 4,y + 4));
+		} else if(entityName == "enemy") {
+			this._grpEnemies.add(new Enemy(x + 4,y,Std.parseInt(this.getProperty(entityData,"etype"))));
+		}
+	}
+	,getProperty: function(xml,propertyName) {
+		var property = xml.elementsNamed("properties").next().elementsNamed("property");
+		while(property.hasNext()) {
+			var property1 = property.next();
+			if(property1.get("name") == "etype") {
+				return property1.get("value");
+			}
+		}
+		return "null";
+	}
+	,checkEnemyVision: function(e) {
+		if(this._mWalls.ray(e.getMidpoint(),this._player.getMidpoint())) {
+			e.seesPlayer = true;
+			var _this = e.playerPos;
+			var point = this._player.getMidpoint();
+			_this.set_x(point.x);
+			_this.set_y(point.y);
+			if(point._weak) {
+				point.put();
+			}
+		} else {
+			e.seesPlayer = false;
 		}
 	}
 	,playerTouchCoin: function(player,coin) {
@@ -66806,7 +66955,7 @@ var lime_utils_AssetCache = function() {
 	this.audio = new haxe_ds_StringMap();
 	this.font = new haxe_ds_StringMap();
 	this.image = new haxe_ds_StringMap();
-	this.version = 672270;
+	this.version = 600071;
 };
 $hxClasses["lime.utils.AssetCache"] = lime_utils_AssetCache;
 lime_utils_AssetCache.__name__ = ["lime","utils","AssetCache"];
@@ -109863,6 +110012,8 @@ openfl_display_DisplayObject.__tempStack = new lime_utils_ObjectPool(function() 
 	stack.set_length(0);
 });
 AssetPaths.music_goes_here__txt = "assets/music/music-goes-here.txt";
+AssetPaths.enemy_0__png = "assets/images/enemy-0.png";
+AssetPaths.enemy_1__png = "assets/images/enemy-1.png";
 AssetPaths.coin__png = "assets/images/coin.png";
 AssetPaths.images_go_here__txt = "assets/images/images-go-here.txt";
 AssetPaths.player__png = "assets/images/player.png";
