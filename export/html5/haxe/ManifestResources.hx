@@ -65,7 +65,7 @@ import sys.FileSystem;
 		
 		#else
 		
-		data = '{"name":null,"assets":"aoy4:pathy36:assets%2Fmusic%2Fmusic-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y29:assets%2Fimages%2Fenemy-0.pngR2i2405R3y5:IMAGER5R7R6tgoR0y29:assets%2Fimages%2Fenemy-1.pngR2i2558R3R8R5R9R6tgoR0y26:assets%2Fimages%2Fcoin.pngR2i984R3R8R5R10R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R11R6tgoR0y28:assets%2Fimages%2Fplayer.pngR2i1876R3R8R5R12R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R13R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R14R6tgoR0y23:assets%2Fdata%2Fmap.tmxR2i4913R3R4R5R15R6tgoR0y25:assets%2Fdata%2Ftiles.pngR2i1056R3R8R5R16R6tgoR0y25:assets%2Fdata%2Ftiles.tsxR2i217R3R4R5R17R6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3y9:pathGroupaR19y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R18R5y26:flixel%2Fsounds%2Fbeep.mp3R20aR22y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3y5:SOUNDR5R23R20aR22R23hgoR2i33629R3R24R5R21R20aR19R21hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R25R26y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R8R5R31R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R8R5R32R6tgh","rootPath":null,"version":2,"libraryArgs":[],"libraryType":null}';
+		data = '{"name":null,"assets":"aoy4:pathy36:assets%2Fmusic%2Fmusic-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y28:assets%2Fimages%2Fhealth.pngR2i984R3y5:IMAGER5R7R6tgoR0y29:assets%2Fimages%2Fpointer.pngR2i992R3R8R5R9R6tgoR0y29:assets%2Fimages%2Fenemy-0.pngR2i2405R3R8R5R10R6tgoR0y29:assets%2Fimages%2Fenemy-1.pngR2i2558R3R8R5R11R6tgoR0y26:assets%2Fimages%2Fcoin.pngR2i984R3R8R5R12R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R13R6tgoR0y28:assets%2Fimages%2Fbutton.pngR2i1126R3R8R5R14R6tgoR0y28:assets%2Fimages%2Fplayer.pngR2i1876R3R8R5R15R6tgoR2i39300R3y5:SOUNDR5y28:assets%2Fsounds%2Fcombat.wavy9:pathGroupaR17hR6tgoR2i20012R3R16R5y26:assets%2Fsounds%2Fhurt.wavR18aR19hR6tgoR2i54320R3R16R5y25:assets%2Fsounds%2Fwin.wavR18aR20hR6tgoR2i33516R3R16R5y26:assets%2Fsounds%2Flose.wavR18aR21hR6tgoR2i24158R3R16R5y26:assets%2Fsounds%2Fmiss.wavR18aR22hR6tgoR2i10518R3R16R5y28:assets%2Fsounds%2Fselect.wavR18aR23hR6tgoR2i34298R3R16R5y26:assets%2Fsounds%2Ffled.wavR18aR24hR6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R25R6tgoR0y34:assets%2Fdata%2Fdata-goes-here.txtR2zR3R4R5R26R6tgoR0y23:assets%2Fdata%2Fmap.tmxR2i4913R3R4R5R27R6tgoR0y25:assets%2Fdata%2Ftiles.pngR2i1056R3R8R5R28R6tgoR0y25:assets%2Fdata%2Ftiles.tsxR2i217R3R4R5R29R6tgoR2i39706R3y5:MUSICR5y28:flixel%2Fsounds%2Fflixel.mp3R18aR31y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i2114R3R30R5y26:flixel%2Fsounds%2Fbeep.mp3R18aR33y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i5794R3R16R5R34R18aR33R34hgoR2i33629R3R16R5R32R18aR31R32hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R35R36y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R8R5R41R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R8R5R42R6tgh","rootPath":null,"version":2,"libraryArgs":[],"libraryType":null}';
 		manifest = AssetManifest.parse (data, rootPath);
 		library = AssetLibrary.fromManifest (manifest);
 		Assets.registerLibrary ("default", library);
@@ -94,11 +94,21 @@ null
 #if flash
 
 @:keep @:bind #if display private #end class __ASSET__assets_music_music_goes_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_health_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_pointer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_enemy_0_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_enemy_1_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_coin_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_images_go_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_button_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_player_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_sounds_combat_wav extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_sounds_hurt_wav extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_sounds_win_wav extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_sounds_lose_wav extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_sounds_miss_wav extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_sounds_select_wav extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_sounds_fled_wav extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_data_goes_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_map_tmx extends null { }
@@ -118,11 +128,21 @@ null
 #elseif (desktop || cpp)
 
 @:keep @:file("assets/music/music-goes-here.txt") #if display private #end class __ASSET__assets_music_music_goes_here_txt extends haxe.io.Bytes {}
+@:keep @:image("assets/images/health.png") #if display private #end class __ASSET__assets_images_health_png extends lime.graphics.Image {}
+@:keep @:image("assets/images/pointer.png") #if display private #end class __ASSET__assets_images_pointer_png extends lime.graphics.Image {}
 @:keep @:image("assets/images/enemy-0.png") #if display private #end class __ASSET__assets_images_enemy_0_png extends lime.graphics.Image {}
 @:keep @:image("assets/images/enemy-1.png") #if display private #end class __ASSET__assets_images_enemy_1_png extends lime.graphics.Image {}
 @:keep @:image("assets/images/coin.png") #if display private #end class __ASSET__assets_images_coin_png extends lime.graphics.Image {}
 @:keep @:file("assets/images/images-go-here.txt") #if display private #end class __ASSET__assets_images_images_go_here_txt extends haxe.io.Bytes {}
+@:keep @:image("assets/images/button.png") #if display private #end class __ASSET__assets_images_button_png extends lime.graphics.Image {}
 @:keep @:image("assets/images/player.png") #if display private #end class __ASSET__assets_images_player_png extends lime.graphics.Image {}
+@:keep @:file("assets/sounds/combat.wav") #if display private #end class __ASSET__assets_sounds_combat_wav extends haxe.io.Bytes {}
+@:keep @:file("assets/sounds/hurt.wav") #if display private #end class __ASSET__assets_sounds_hurt_wav extends haxe.io.Bytes {}
+@:keep @:file("assets/sounds/win.wav") #if display private #end class __ASSET__assets_sounds_win_wav extends haxe.io.Bytes {}
+@:keep @:file("assets/sounds/lose.wav") #if display private #end class __ASSET__assets_sounds_lose_wav extends haxe.io.Bytes {}
+@:keep @:file("assets/sounds/miss.wav") #if display private #end class __ASSET__assets_sounds_miss_wav extends haxe.io.Bytes {}
+@:keep @:file("assets/sounds/select.wav") #if display private #end class __ASSET__assets_sounds_select_wav extends haxe.io.Bytes {}
+@:keep @:file("assets/sounds/fled.wav") #if display private #end class __ASSET__assets_sounds_fled_wav extends haxe.io.Bytes {}
 @:keep @:file("assets/sounds/sounds-go-here.txt") #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends haxe.io.Bytes {}
 @:keep @:file("assets/data/data-goes-here.txt") #if display private #end class __ASSET__assets_data_data_goes_here_txt extends haxe.io.Bytes {}
 @:keep @:file("assets/data/map.tmx") #if display private #end class __ASSET__assets_data_map_tmx extends haxe.io.Bytes {}

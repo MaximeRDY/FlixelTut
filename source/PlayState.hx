@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxColor;
 import flixel.system.debug.log.LogStyle;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.FlxG;
@@ -10,12 +11,21 @@ import flixel.tile.FlxTilemap;
 import flixel.addons.editors.tiled.TiledMap;
 import flixel.FlxState;
 
+using flixel.util.FlxSpriteUtil;
+
 class PlayState extends FlxState {
 	var _player:Player;
 	var _map:TiledMap;
 	var _mWalls:FlxTilemap;
 	var _grpCoins:FlxTypedGroup<Coin>;
 	var _grpEnemies:FlxTypedGroup<Enemy>;
+	var _hud:HUD;
+	var _money:Int = 0;
+	var _health:Int = 3;
+	var _inCombat:Bool = false;
+	var _combatHud:CombatHUD;
+	var _ending:Bool;
+	var _won:Bool;
 
 	override public function create():Void {
 		_map = new TiledMap(AssetPaths.map__tmx);
@@ -44,15 +54,50 @@ class PlayState extends FlxState {
 		add(_player);
 
 		FlxG.camera.follow(_player, TOPDOWN, 1);
+
+		_hud = new HUD();
+		add(_hud);
+
+		_combatHud = new CombatHUD();
+		add(_combatHud);
+
 		super.create();
 	}
 
 	override public function update(elapsed:Float):Void {
-		FlxG.collide(_player, _mWalls);
-		FlxG.overlap(_player, _grpCoins, playerTouchCoin);
-		FlxG.collide(_grpEnemies, _mWalls);
-		_grpEnemies.forEachAlive(checkEnemyVision);
+		if (!_inCombat) {
+			FlxG.collide(_player, _mWalls);
+			FlxG.overlap(_player, _grpCoins, playerTouchCoin);
+			FlxG.collide(_grpEnemies, _mWalls);
+			_grpEnemies.forEachAlive(checkEnemyVision);
+			FlxG.overlap(_player, _grpEnemies, playerTouchEnemy);
+		} else {
+			if (!_combatHud.visible) {
+				_health = _combatHud.playerHealth;
+				_hud.updateHUD(_health, _money);
+				if (_combatHud.outcome == DEFEAT) {
+					_ending = true;
+					FlxG.camera.fade(FlxColor.BLACK, .33, false, doneFadeOut);
+				} else {
+					if (_combatHud.outcome == VICTORY) {
+						_combatHud.e.kill();
+						if (_combatHud.e.etype == 1) {
+							_won = true;
+							_ending = true;
+							FlxG.camera.fade(FlxColor.BLACK, .33, false, doneFadeOut);
+						}
+					} else {
+						_combatHud.e.flicker();
+					}
+					_inCombat = false;
+					_player.active = true;
+					_grpEnemies.active = true;
+				}
+			}
+		}
 		super.update(elapsed);
+		if (_ending)
+			return;
 	}
 
 	function placeEntities(entityName:String, entityData:Xml):Void {
@@ -87,7 +132,26 @@ class PlayState extends FlxState {
 
 	function playerTouchCoin(player:Player, coin:Coin):Void {
 		if (player.alive && player.exists && coin.alive && coin.exists) {
+			_money++;
+			_hud.updateHUD(_health, _money);
 			coin.kill();
 		}
+	}
+
+	function playerTouchEnemy(P:Player, E:Enemy):Void {
+		if (P.alive && P.exists && E.alive && E.exists && !E.isFlickering()) {
+			startCombat(E);
+		}
+	}
+
+	function startCombat(E:Enemy):Void {
+		_inCombat = true;
+		_player.active = false;
+		_grpEnemies.active = false;
+		_combatHud.initCombat(_health, E);
+	}
+
+	function doneFadeOut():Void {
+		FlxG.switchState(new GameOverState(_won, _money));
 	}
 }
